@@ -1,0 +1,41 @@
+Level One:
+	Tutorial
+	- Low Level Monsters in dungeon
+	- No heals, but way to avoid damage
+	- tutorial rooms, where a sign on the wall tells you how to play/ open menus
+	- small level, 4x4
+	- small boss
+ 
+Level Two:
+	- trap rooms, rooms with optional traps
+	- higher level monsters
+	- Boss monster
+
+Level Three
+	- start of level healing only useabe once
+	- even harder monsters
+	- special drops
+	- posssible meet ally and pass logic test to get weapon
+Level Four
+	- full heal again
+	- monsters able to block attacks
+	- even harder monsters (more health more damage)
+	- bosses have health and damage scaled from your character
+	- randomly scaled enemy health and damage
+Level Five
+	- Full heal again
+	- even harder stuff again
+	- monsters have health re-gen
+	- neutral monsters can entertain the players actions, fight or friends
+Win.
+
+
+Blues Brothers mission statement
+possible different classes of player choice with different weapon possibilities
+
+
+
+
+Basic Story: 
+You just woke up. Shitty story, I know. You've woken up in this dungeon enterance with a broom and a dustpan. God says he wants you to clean the dungeon of filth and scum.
+You trip and fall, the broom breaks in half giving you a sharp stick. "A sword and shield!" you think. How pathetic. Go clean the dungeon.
