@@ -9,12 +9,12 @@
 import random
 
 #initalize dungeon forced
-xvalues = int(input("Dungeon rows please: "))
-yvalues = int(input("Dungeon Columns please: "))
+xvalues =  4 #int(input("Dungeon rows please: "))
+yvalues =  4 #int(input("Dungeon Columns please: "))
 dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
-print(dungeonPOS)
-roomx = 0
-roomy = 0
+#print(dungeonPOS)
+roomx = 1
+roomy = 1
 currentDungeon = dungeonPOS
 def clearOldroom():
 	currentDungeon = [[0 for x in range(yvalues)] for x in range(xvalues)] 
@@ -37,7 +37,6 @@ def clearOldroom():
 #/////////////////////////////////////////////////////
 
 # Get a monster
-
 def scary():
 	monsterX = ["Dragon", "slim", "golin", "ogre", "nekomata",  "ghost", "zombie"]
 	monsterZ = ["ghoul", "skeleton", "spider", "snake", "kobolt", "red boar"]
@@ -46,6 +45,7 @@ def scary():
 	currentX = random.randrange(monsterXSize)
 	currentZ = random.randrange(monsterZSize)
 	return monsterX[currentX] + "-" + monsterZ[currentZ]
+
 
 
 #randomgenerator input probability
@@ -73,9 +73,10 @@ def takeDam():
 	
 #trap room
 def trapRoom():
-	tmp = input("You see a box on the ground, do you open it?")
+	global pLife
+	tmp = input("You see a box on the ground, do you open it? ")
 	if tmp.lower() == "yes":
-		if randProb(80):
+		if randProb(20):
 			print("Its a trap! You took damage")
 			takeDam()
 			print("You have " + str(pLife) +" health")
@@ -96,7 +97,7 @@ def monster():
 	while themunsters:
 		print("A monster steps out of the dark...")
 		print("As it grows closer you can see its a " + scary())
-		danger = input("What do you decide to do? [Run, Battle, Freeze (and hope it doenst see you)]")
+		danger = input("What do you decide to do? [Run, Battle, Freeze (and hope it doenst see you)] ")
 		if danger.lower() == "run":
 			if randProb(80) == 1:
 				print("You escaped")
@@ -112,14 +113,16 @@ def monster():
 				break			
 		elif danger.lower() == "battle":
 			takeDam()
-			print("poor figting mechanics let you defeat the monster")
+			print("Poor figting mechanics let you defeat the monster, but you were hurt")
 			if (pLife <= 0):
-				print("Unfortunately you died in the process...")
-				print("you are dead. goodbye!")
+				print("Unfortunately you died in the process...\n")
+				print("you are dead. goodbye!\n\n")
 				exit()
-			print("You have" + str(pLife) +" health left over")
+			print("You have " + str(pLife) +" health left over")
 			break
 		elif danger.lower() == "freeze":
+			print("You freeze in place, holding your breath")
+			input("Keep waiting?")
 			if randProbRand() == 1:
 				print("Holy shit! it worked")
 				break
@@ -133,12 +136,12 @@ def monster():
 				print("You have " + str(pLife) +" health left over")
 				break
 		else:
-			print("What? I didnt catch that.")
+			print("\nWhat? I didnt catch that.\n")
 			continue
 			
 #the free roomm
 def free():
-	print("You enter a dimly lit room, you see a figure in the distance but cannot be sure that its real")
+	print("You enter a dimly lit room, you see a figure in the distance but cannot be sure that its real.")
 #the health room
 def healthUp():
 	global pLife
@@ -152,7 +155,7 @@ def healthUp():
 	print("You have " + str(pLife) +" health left over")
 #enocounter
 def encounter():
-	tmp = random.randint(0,99)
+	tmp = random.randint(0,102)
 	if tmp < 10: #10 percetn
 		healthUp()
 	elif tmp >= 10 and tmp < 30: #20 percent
@@ -161,10 +164,13 @@ def encounter():
 		monster()
 	elif tmp >= 70 and tmp < 100: # 30 percnet
 		trapRoom()
+	elif 100 >= 103 and tmp < 103:
+		print("You see a man on the ground begging for help. He offers to give you a great reward if you take him out of \nthe dungeon with you but as you agree a door shuts from behind you and when you turn back to him he is gone.")
+		
 	else:
 		free()	
 #initialize status of player interaction things, such as health, damage and level for begining of game
-level = 0
+level = 1
 pLife = 100
 
 
@@ -173,12 +179,11 @@ pLife = 100
 
 
 
-while level < 6 or pLife <= 0:
-
+while level < 6 or pLife <= 0:	
 	# this is code that allows you to go into a different room
 	while (currentDungeon[xvalues - 1][yvalues - 1] != 1):
-		askDir = input("Where would you like to go? [North, South, East, West]")
-		print(askDir.lower())
+		askDir = input("\nWhere would you like to go? [North, South, East, West]\n")
+		#print(askDir.lower())
 		if askDir == "east" and (roomx + 1) <= (xvalues - 1):
 			roomx = roomx + 1
 			clearOldroom
@@ -196,14 +201,30 @@ while level < 6 or pLife <= 0:
 			clearOldroom
 			currentDungeon[roomx][roomy] = 1
 		else:
-			print("Your input was incorrect or invalid. Please try again")
-			print("you are currently in the " + str(roomx) + "," + str(roomy) + "room") #comment out later probably
+			print("\nThats not a way you can go! Try that again.")
+			# print("You are currently in the " + str(roomx) + "," + str(roomy) + "room") #comment out later probably
 			continue
-		print("you are in the " + str(roomx) + "," + str(roomy) + "room") #comment out later probably
+		#print("you are in the " + str(roomx) + "," + str(roomy) + " room") #comment out later probably
+		print("Health: " + str(pLife) + "\n")
 		encounter()
+	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level"+ str(level) + "\" completed")
+	xvalues *= 2
+	yvalues *= 2
+	dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
+	roomx = 1
+	roomy = 1
+	currentDungeon = dungeonPOS
+	level += 1
+	if level == 6:
+		print("Finally stumbling past the last door you make it to the exit. Finally you don't have to play this game again!")
+print("Your score is " + str(pLife * level))
+print("You got to level number " + str(level))
+print("with " + str(pLife) + " left")
 
-
-		
+	
+	
+	
+	
 	
 	
 	
