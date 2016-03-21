@@ -67,7 +67,8 @@ def randProbRand():
 		
 #take damgage code
 def takeDam():
-	global pLife -= random.randint(20,45)
+	global pLife
+	pLife -= random.randint(20,45)
 	
 	
 #trap room
@@ -77,21 +78,22 @@ def trapRoom():
 		if randProb(80):
 			print("Its a trap! You took damage")
 			takeDam()
-			print("You have" + str(global pLife) +" health")
-			if (global pLife <= 0):
+			print("You have " + str(pLife) +" health")
+			if (pLife <= 0):
 				print("you are dead. goodbye!")
 				exit()
 		else:
 			print("There was a health in the box! +20 hp")
-			global pLife += 20
-			print("You have" + str(pLife) +" health")
+			pLife += 20
+			print("You have " + str(pLife) +" health")
 	else:
 		print("You decided to not risk it....")
 			
 #monster encounter option
 def monster():
-	themunsters = true
-	while themunsters 
+	global pLife
+	themunsters = True
+	while themunsters:
 		print("A monster steps out of the dark...")
 		print("As it grows closer you can see its a " + scary())
 		danger = input("What do you decide to do? [Run, Battle, Freeze (and hope it doenst see you)]")
@@ -101,9 +103,9 @@ def monster():
 				break
 			else:
 				tmp2 =  random.randint(0,50)
-				global pLife -= tmp2
-				print("You took " + str(tmp2) + "damage while escaping")
-				if (global pLife <= 0):
+				pLife -= tmp2
+				print("You took " + str(tmp2) + " damage while escaping")
+				if (pLife <= 0):
 					print("Unfortunately you died in the process...")
 					print("you are dead. goodbye!")
 					exit()
@@ -111,7 +113,7 @@ def monster():
 		elif danger.lower() == "battle":
 			takeDam()
 			print("poor figting mechanics let you defeat the monster")
-			if (global pLife <= 0):
+			if (pLife <= 0):
 				print("Unfortunately you died in the process...")
 				print("you are dead. goodbye!")
 				exit()
@@ -123,12 +125,12 @@ def monster():
 				break
 			else:
 				print("It didnt work! You got hit")
-				global pLife -= random.randint(5,25)
-				if (global pLife <= 0):
+				pLife -= random.randint(5,25)
+				if (pLife <= 0):
 					print("Unfortunately you died in the process...")
 					print("you are dead. goodbye!")
 					exit()
-				print("You have" + str(global pLife) +" health left over")
+				print("You have " + str(pLife) +" health left over")
 				break
 		else:
 			print("What? I didnt catch that.")
@@ -139,14 +141,15 @@ def free():
 	print("You enter a dimly lit room, you see a figure in the distance but cannot be sure that its real")
 #the health room
 def healthUp():
+	global pLife
 	print("You stumble over the lip of the doorway.")
 	print("You notice the room is an abandonded medical bay.")
 	print("You walk over to the tables and see the mangled corpses.")
 	print("Stepping back you fall on your ass and notice a needle that says \"+20 hp\" but it looks a little used... ")
 	print("Deciding that its worth it to take the risk of long term disease you inject the contents into your thigh.")
 	print("You gained some health!")
-	global pLife += random.randint(3,20)
-	print("You have" + str(pLife) +" health left over")
+	pLife += random.randint(3,20)
+	print("You have " + str(pLife) +" health left over")
 #enocounter
 def encounter():
 	tmp = random.randint(0,99)
@@ -170,7 +173,7 @@ pLife = 100
 
 
 
-while level < 6 or global pLife <= 0:
+while level < 6 or pLife <= 0:
 
 	# this is code that allows you to go into a different room
 	while (currentDungeon[xvalues - 1][yvalues - 1] != 1):
