@@ -1,10 +1,3 @@
-# The story so far is that you have woken up in a dungeon
-# you no nothing other than that you are a simple man and want to go home
-# at home you have internet, tv, and your bed.
-# you notice next to you a scrap from your favoite blanket
-# this enrages you.
-# now you want the blood of your enemys and to get a good nights rest
-
 #imports
 import random
 
@@ -46,8 +39,6 @@ def scary():
 	currentZ = random.randrange(monsterZSize)
 	return monsterX[currentX] + "-" + monsterZ[currentZ]
 
-
-
 #randomgenerator input probability
 def randProb(prob):
 	number = random.randint(0,99)
@@ -70,7 +61,6 @@ def takeDam():
 	global pLife
 	pLife -= random.randint(20,45)
 	
-	
 #trap room
 def trapRoom():
 	global pLife
@@ -82,7 +72,7 @@ def trapRoom():
 			print("You have " + str(pLife) +" health")
 			if (pLife <= 0):
 				print("you are dead. goodbye!")
-				exit()
+				gameOver()
 		else:
 			print("There was a health in the box! +20 hp")
 			pLife += 20
@@ -99,7 +89,7 @@ def monster():
 		print("As it grows closer you can see its a " + scary())
 		danger = input("What do you decide to do? [Run, Battle, Freeze (and hope it doenst see you)] ")
 		if danger.lower() == "run":
-			if randProb(80) == 1:
+			if randProb(2) == 1:
 				print("You escaped")
 				break
 			else:
@@ -109,7 +99,7 @@ def monster():
 				if (pLife <= 0):
 					print("Unfortunately you died in the process...")
 					print("you are dead. goodbye!")
-					exit()
+					gameOver()
 				break			
 		elif danger.lower() == "battle":
 			takeDam()
@@ -117,7 +107,7 @@ def monster():
 			if (pLife <= 0):
 				print("Unfortunately you died in the process...\n")
 				print("you are dead. goodbye!\n\n")
-				exit()
+				gameOver()
 			print("You have " + str(pLife) +" health left over")
 			break
 		elif danger.lower() == "freeze":
@@ -132,7 +122,7 @@ def monster():
 				if (pLife <= 0):
 					print("Unfortunately you died in the process...")
 					print("you are dead. goodbye!")
-					exit()
+					gameOver()
 				print("You have " + str(pLife) +" health left over")
 				break
 		else:
@@ -173,9 +163,29 @@ def encounter():
 level = 1
 pLife = 100
 
+	
+def gameOver():
+	print("Your score is " + str(pLife * level))
+	print("You got to level number " + str(level))
+	print("with " + str(pLife) + " left")
+	print("")
+	exit()
+		
 
-#place intro/story elements here
-
+#the story!
+print("\n\n\n\n\n\n\n\nYou have found yourself in a military base.")
+print("On the wall you see a sign that reads:")
+print("\n////////////////////////")
+print("///////Base_10//////////")
+print("////////////////////////\n")
+print("You sigh, it sounds like two levels and you can go home.")
+print("You hear in the distance a growl, or was it a cry for help?")
+print("\"Whatever\" you say. You just want to get home, being a nice person doesnt get you home to your bed.")
+print("As you step forward you see a piece of your favoirte blanket, and that award you hung on your wall.")
+print("You realize that the room you have woken up is filled with shrapnel and bits and pieces of your room.")
+print("You begin to wonder if your whole home is gone, and, wait a second, how did you get here at all?")
+print("")
+print("")
 
 
 
@@ -205,27 +215,30 @@ while level < 6 or pLife <= 0:
 			# print("You are currently in the " + str(roomx) + "," + str(roomy) + "room") #comment out later probably
 			continue
 		#print("you are in the " + str(roomx) + "," + str(roomy) + " room") #comment out later probably
-		print("Health: " + str(pLife) + "\n")
+		print("Health: " + str(pLife) + "\n.................................................................................................................\n")
 		encounter()
 	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level"+ str(level) + "\" completed")
 	xvalues *= 2
 	yvalues *= 2
 	dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
-	roomx = 1
-	roomy = 1
+	roomx = random.randint(0,(xvalues/2))
+	roomy = random.randint(0,(yvalues/2))
 	currentDungeon = dungeonPOS
 	level += 1
 	if level == 6:
 		print("Finally stumbling past the last door you make it to the exit. Finally you don't have to play this game again!")
+		print("You turn around as you fall on your ass and see the building from the outside.")
+		print("It looks like your house, re-enforced with armor and with tanks around")
+		print("You kick the front door down and realize your house doenst have 5 levels and a ton of monsters in it. \nA voice says \"You can awake from your nightmare now.\"")
+		print("")
+		print("")
 print("Your score is " + str(pLife * level))
 print("You got to level number " + str(level))
-print("with " + str(pLife) + " left")
+print("with " + str(pLife) + "hp left")
+print("")
+exit()
 
-	
-	
-	
-	
-	
+
 	
 	
 	
