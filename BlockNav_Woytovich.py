@@ -22,9 +22,6 @@ roomNavGOD()
 print(currentDungeon)
 
 
-
-
-
 while (currentDungeon[xvalues - 1][yvalues - 1] != 1):
 	askDir = input("Where would you like to go? [North, South, East, West]")
 	print(askDir.lower())
