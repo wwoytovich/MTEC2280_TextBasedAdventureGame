@@ -1,0 +1,18 @@
+ideas for expansion on the text based adventure game
+ideas are numbered througout this document and the document will refer to the
+  number as a refernce to the idea
+
+ideas
+1. intergrate story better into game 
+2. track player in space to not have rooms be repeats when you re-enter them
+3. randomize the end room instead of it being the north east corner
+4. create a score after every level that compounds for a final score
+5. add a little ascii art to make the game more visually interesting
+
+Difficulty and time
+1 - easy, as long as possible
+2 - medium, a few hours to code and troulbeshoot
+3 - easy, quick
+4 - easy, quick
+5 - easy, as long as possible
+
