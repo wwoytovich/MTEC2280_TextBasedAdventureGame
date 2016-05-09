@@ -1,5 +1,35 @@
 #imports
 import random
+import time
+# serial information for input
+import serial
+serW = serial.Serial("COM3",9600) #woody's arduino
+#serZ = serial.Serial("COM4",9600) #ziul's arduino
+time.sleep(5)
+#print(ser.name)
+
+def sendW(char):  #send serial to woodys arduino
+	#while(True):
+	command = char
+	#print(char)
+	command = command.strip()
+	command = command + "\n"
+	command = command.encode()
+	#print(command)
+	serW.write(command)
+
+	
+	
+# def sendZ(char): # send data to ziul's arduino
+	#while(True):
+	# command = char
+	# command = command.strip()
+	# command = command + "\n"
+	# command = command.encode()
+	# print(command)
+	# serW.write(command)
+	# ser.close()
+	
 
 #initalize dungeon forced
 xvalues =  4 #int(input("Dungeon rows please: "))
@@ -9,6 +39,7 @@ dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)]
 roomx = 1
 roomy = 1
 currentDungeon = dungeonPOS
+
 def clearOldroom():
 	currentDungeon = [[0 for x in range(yvalues)] for x in range(xvalues)] 
 
@@ -147,16 +178,20 @@ def healthUp():
 def encounter():
 	tmp = random.randint(0,102)
 	if tmp < 10: #10 percetn
+		sendW("h")
 		healthUp()
 	elif tmp >= 10 and tmp < 30: #20 percent
+		sendW("f");
 		free()
 	elif tmp >= 30 and tmp < 70: # 40 percent
+		sendW("m")
 		monster()
 	elif tmp >= 70 and tmp < 100: # 30 percnet
+		sendW("t")
 		trapRoom()
 	elif 100 >= 103 and tmp < 103:
 		print("You see a man on the ground begging for help. He offers to give you a great reward if you take him out of \nthe dungeon with you but as you agree a door shuts from behind you and when you turn back to him he is gone.")
-		
+		sendW("r")
 	else:
 		free()	
 #initialize status of player interaction things, such as health, damage and level for begining of game
@@ -169,10 +204,14 @@ def gameOver():
 	print("You got to level number " + str(level))
 	print("with " + str(pLife) + " left")
 	print("")
+	sendW("k")
 	exit()
 		
 
 #the story!
+#intro song as well
+
+
 print("\n\n\n\n\n\n\n\nYou have found yourself in a military base.")
 print("On the wall you see a sign that reads:")
 print("\n////////////////////////")
@@ -186,7 +225,7 @@ print("You realize that the room you have woken up is filled with shrapnel and b
 print("You begin to wonder if your whole home is gone, and, wait a second, how did you get here at all?")
 print("")
 print("")
-
+sendW("p")
 
 
 while level < 6 or pLife <= 0:	
@@ -194,7 +233,7 @@ while level < 6 or pLife <= 0:
 	while (currentDungeon[xvalues - 1][yvalues - 1] != 1):
 		askDir = input("\nWhere would you like to go? [North, South, East, West]\n")
 		#print(askDir.lower())
-		if askDir == "east" and (roomx + 1) <= (xvalues - 1):
+		if askDir.lower() == "east" and (roomx + 1) <= (xvalues - 1):
 			roomx = roomx + 1
 			clearOldroom
 			currentDungeon[roomx][roomy] = 1
@@ -218,6 +257,7 @@ while level < 6 or pLife <= 0:
 		print("Health: " + str(pLife) + "\n.................................................................................................................\n")
 		encounter()
 	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level"+ str(level) + "\" completed")
+	# sendZ(level)###########################################################################################################################
 	xvalues *= 2
 	yvalues *= 2
 	dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
@@ -225,6 +265,7 @@ while level < 6 or pLife <= 0:
 	roomy = random.randint(0,(yvalues/2))
 	currentDungeon = dungeonPOS
 	level += 1
+	sendW("l")
 	if level == 6:
 		print("Finally stumbling past the last door you make it to the exit. Finally you don't have to play this game again!")
 		print("You turn around as you fall on your ass and see the building from the outside.")
@@ -232,7 +273,8 @@ while level < 6 or pLife <= 0:
 		print("You kick the front door down and realize your house doenst have 5 levels and a ton of monsters in it. \nA voice says \"You can awake from your nightmare now.\"")
 		print("")
 		print("")
-print("Your score is " + str(pLife * level))
+		sendW("w")
+print("Your score is " + str((pLife * level) + level))
 print("You got to level number " + str(level))
 print("with " + str(pLife) + "hp left")
 print("")

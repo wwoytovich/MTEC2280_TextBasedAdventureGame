@@ -25,24 +25,24 @@ int youDiedBeats[10] = {200,200,200,200,200,200,200,200,20,2500};
 int youDiedNotes[10] = {1000,0,1000,0,1000,724,526,357,0,1000};
 
 
-int newLevelBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int newLevelNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int newLevelBeats[10] = {88,90,92,95,98,105,110,125,130,135};
+int newLevelNotes[10] = {250,300,400,500,450,250,300,400,500,600};
 
 
-int rareEncounterBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int rareEncounterNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int rareEncounterBeats[10] = {50,50,50,50,50,50,50,50,50,200};
+int rareEncounterNotes[10] = {1000,1505,1000,1500,1000,1475,1000,1440,1000,1390};
 
 
-int healthRoomBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int healthRoomNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int healthRoomBeats[10] = {200,150,250,150,100,200,150,150,125,125};
+int healthRoomNotes[10] = {200,0,300,00,1000,0,200,0,600,0};
 
 
-int takeDamageBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int takeDamageNotes[100] = {100,200,300,400,500,600,700,800,900,1000};
+int takeDamageBeats[10] = {100,75,300,100,75,40,40,40,20,40};
+int takeDamageNotes[100] = {540,500,0,540,500,220,220,220,220,0};
 
 
-int winSongBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int winSongNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int winSongBeats[10] = {100,200,300,100,200,300,100,200,100,100};
+int winSongNotes[10] = {100,200,400,100,200,400,100,200,400,600};
 /////////////////////////////////////
 ///////////////////////////////////////
 /////////////////////////////////////
@@ -79,8 +79,8 @@ void readinput()
   {
     // read the incoming byte:
     incomingByte = Serial.read();
-    Serial.print("I received: ");
-    Serial.println(incomingByte);
+   // Serial.print("I received: ");
+    //Serial.println(incomingByte);
     switch(char(incomingByte))
     {
       case 't': //trap room
@@ -95,7 +95,7 @@ void readinput()
         //tone(8, 1000, 100);
         break;
         
-      case 'i': //intro song
+      case 'p': //intro song
         for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = introSongNotes[i];
@@ -138,7 +138,7 @@ void readinput()
         incomingByte = 'q';
         break;
         
-      case 'r':
+      case 'r': //rare encounter
         for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = rareEncounterNotes[i];
@@ -179,11 +179,11 @@ void readinput()
         break;
 
       default:
-        tone(8, 444,20);
+        //tone(8, 444,20);
         delay(200);
-        tone(8, 444,20);
+        //tone(8, 444,20);
         delay(200);
-        tone(8, 444,20);
+        //tone(8, 444,20);
         delay(200);
         incomingByte = 'q';
         break;
@@ -195,7 +195,7 @@ void playSong()
 {
   for(int tmp = 0; tmp < 10; tmp++ )
   {
-    Serial.println("playing song");
+    //Serial.println("playing song");
     tone(speaker, currentSongnotes[tmp], currentSongbeats[tmp]);
     delay(currentSongbeats[tmp]+2);
   }
