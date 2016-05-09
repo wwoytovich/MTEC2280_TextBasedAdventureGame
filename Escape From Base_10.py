@@ -5,7 +5,7 @@ import time
 import serial
 serW = serial.Serial("COM3",9600) #woody's arduino
 #serZ = serial.Serial("COM4",9600) #ziul's arduino
-time.sleep(5)
+time.sleep(2)
 #print(ser.name)
 
 def sendW(char):  #send serial to woodys arduino
@@ -27,8 +27,8 @@ def sendW(char):  #send serial to woodys arduino
 	# command = command + "\n"
 	# command = command.encode()
 	# print(command)
-	# serW.write(command)
-	# ser.close()
+	# serZ.write(command)
+	# serZ.close()
 	
 
 #initalize dungeon forced
@@ -205,6 +205,7 @@ def gameOver():
 	print("with " + str(pLife) + " left")
 	print("")
 	sendW("k")
+	#sendZ("6")
 	exit()
 		
 
@@ -226,6 +227,7 @@ print("You begin to wonder if your whole home is gone, and, wait a second, how d
 print("")
 print("")
 sendW("p")
+#sendZ("1")for when ziul's arduino is connected
 
 
 while level < 6 or pLife <= 0:	
@@ -257,7 +259,7 @@ while level < 6 or pLife <= 0:
 		print("Health: " + str(pLife) + "\n.................................................................................................................\n")
 		encounter()
 	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level"+ str(level) + "\" completed")
-	# sendZ(level)###########################################################################################################################
+	# sendZ(str(level))
 	xvalues *= 2
 	yvalues *= 2
 	dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
@@ -274,6 +276,7 @@ while level < 6 or pLife <= 0:
 		print("")
 		print("")
 		sendW("w")
+		#sendZ("7")
 print("Your score is " + str((pLife * level) + level))
 print("You got to level number " + str(level))
 print("with " + str(pLife) + "hp left")
