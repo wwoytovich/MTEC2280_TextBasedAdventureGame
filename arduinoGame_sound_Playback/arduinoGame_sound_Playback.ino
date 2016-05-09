@@ -5,24 +5,24 @@
 int qN = 50;
 int hN = 100;
 
-int trapRoomBeats[10] = {150,200,150,150,750,50,50,50,50,50};
-int trapRoomNotes[10] = {NOTE_GS4,NOTE_G4,NOTE_FS4,NOTE_AS4,NOTE_FS4,NOTE_DS4,0,0,0,0};
+int trapRoomBeats[10] = {150,200,150,150,750,75,75,75,100,200};
+int trapRoomNotes[10] = {NOTE_GS4,NOTE_G4,NOTE_FS4,NOTE_AS4,NOTE_FS4,NOTE_DS4,NOTE_FS4,NOTE_AS4,NOTE_FS4,NOTE_DS4};
 
 
-int introSongBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int introSongNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int introSongBeats[10] = {500,200,500,200,1500,400,500,705,1025,250};
+int introSongNotes[10] = {NOTE_AS5,NOTE_A6,NOTE_AS5,NOTE_B5,NOTE_C6,NOTE_G5,NOTE_A5,NOTE_DS6,NOTE_C6,0};
 
 
-int monsterRoomBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int monsterRoomNotes[100] = {100,200,300,400,500,600,700,800,900,1000};
+int monsterRoomBeats[10] = {100,50,100,50,300,100,50,100,50,300};
+int monsterRoomNotes[10] = {NOTE_C3,0,NOTE_C3,0,NOTE_DS3,NOTE_C3,0,NOTE_C3,0,NOTE_DS3};
 
 
-int nothingRoomBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int nothingRoomNotes[100] = {100,200,300,400,500,600,700,800,900,1000};
+int nothingRoomBeats[10] = {100,200,300,400,500,400,300,200,100,10};
+int nothingRoomNotes[10] = {500,600,700,800,900,1000,850,760,540,280};
 
 
-int youDiedBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
-int youDiedNotes[10] = {100,200,300,400,500,600,700,800,900,1000};
+int youDiedBeats[10] = {200,200,200,200,200,200,200,200,20,2500};
+int youDiedNotes[10] = {1000,0,1000,0,1000,724,526,357,0,1000};
 
 
 int newLevelBeats[10] = {100,200,300,400,500,600,700,800,900,1000};
@@ -84,7 +84,7 @@ void readinput()
     switch(char(incomingByte))
     {
       case 't': //trap room
-          for(int i = 0 ; i < 9 ; i++ )
+          for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = trapRoomNotes[i];
           currentSongbeats[i] = trapRoomBeats[i];
@@ -96,27 +96,30 @@ void readinput()
         break;
         
       case 'i': //intro song
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = introSongNotes[i];
           currentSongbeats[i] = introSongBeats[i];
         }
         playSong();
+        playSong();
         incomingByte = 'q';
         break;
         
       case 'm': //monster room
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = monsterRoomNotes[i];
           currentSongbeats[i] = monsterRoomBeats[i];
         } 
+        playSong();
+        playSong();
         playSong(); 
         incomingByte = 'q';
         break;
         
       case 'k': // you die (are killed)
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = youDiedNotes[i];
           currentSongbeats[i] = youDiedBeats[i];
@@ -126,7 +129,7 @@ void readinput()
         break;
         
       case 'l': // new level
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = newLevelNotes[i];
           currentSongbeats[i] = newLevelBeats[i];
@@ -136,7 +139,7 @@ void readinput()
         break;
         
       case 'r':
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = rareEncounterNotes[i];
           currentSongbeats[i] = rareEncounterBeats[i];
@@ -146,7 +149,7 @@ void readinput()
         break;
         
       case 'h':
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = healthRoomNotes[i];
           currentSongbeats[i] = healthRoomBeats[i];
@@ -156,7 +159,7 @@ void readinput()
         break;
 
       case 'w':
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = winSongNotes[i];
           currentSongbeats[i] = winSongBeats[i];
@@ -166,7 +169,7 @@ void readinput()
         break;
 
       case 'd': // take damage
-        for(int i = 0 ; i < 9 ; i++ )
+        for(int i = 0 ; i < 10 ; i++ )
         {
           currentSongnotes[i] = takeDamageNotes[i];
           currentSongbeats[i] = takeDamageBeats[i];
@@ -190,7 +193,7 @@ void readinput()
 
 void playSong()
 {
-  for(int tmp = 0; tmp < 9; tmp++ )
+  for(int tmp = 0; tmp < 10; tmp++ )
   {
     Serial.println("playing song");
     tone(speaker, currentSongnotes[tmp], currentSongbeats[tmp]);
