@@ -20,15 +20,15 @@ def sendW(char):  #send serial to woodys arduino
 
 	
 	
-def sendZ(char): # send data to ziul's arduino
+def sendZ(char2): # send data to ziul's arduino
 	#while(True):
-	command2 = char
+	command2 = char2
 	command2 = command2.strip()
 	command2 = command2 + "\n"
 	command2 = command2.encode()
 	# print(command)
 	serZ.write(command2)
-	serZ.close()
+	
 	
 
 #initalize dungeon forced
@@ -143,7 +143,7 @@ def monster():
 			break
 		elif danger.lower() == "freeze":
 			print("You freeze in place, holding your breath")
-			input("Keep waiting?")
+			input("Keep waiting? ")
 			if randProbRand() == 1:
 				print("Holy shit! it worked")
 				break
@@ -180,16 +180,16 @@ def encounter():
 	if tmp < 10: #10 percetn
 		sendW("h")
 		healthUp()
-	elif tmp >= 10 and tmp < 30: #20 percent
+	elif tmp >= 10 and tmp < 50: #20 percent
 		sendW("f");
 		free()
-	elif tmp >= 30 and tmp < 70: # 40 percent
+	elif tmp >= 50 and tmp < 70: # 20 percent
 		sendW("m")
 		monster()
-	elif tmp >= 70 and tmp < 100: # 30 percnet
+	elif tmp >= 70 and tmp < 90: # 20 percnet
 		sendW("t")
 		trapRoom()
-	elif 100 >= 103 and tmp < 103:
+	elif tmp >= 90 and tmp < 103:
 		print("You see a man on the ground begging for help. He offers to give you a great reward if you take him out of \nthe dungeon with you but as you agree a door shuts from behind you and when you turn back to him he is gone.")
 		sendW("r")
 	else:
@@ -206,6 +206,8 @@ def gameOver():
 	print("")
 	sendW("k")
 	sendZ("6")
+	serZ.close()
+	serW.close()
 	exit()
 		
 
@@ -227,7 +229,7 @@ print("You begin to wonder if your whole home is gone, and, wait a second, how d
 print("")
 print("")
 sendW("p")
-
+sendZ("3")
 
 
 while level < 6 or pLife <= 0:	
@@ -258,8 +260,7 @@ while level < 6 or pLife <= 0:
 		#print("you are in the " + str(roomx) + "," + str(roomy) + " room") #comment out later probably
 		print("Health: " + str(pLife) + "\n.................................................................................................................\n")
 		encounter()
-	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level"+ str(level) + "\" completed")
-	sendZ(char(level))
+	print("You go down a staircase to be troubled with the site of another maze of rooms and met with a sign painted in blood that reads \"Level "+ str(level) + "\" completed")
 	xvalues *= 2
 	yvalues *= 2
 	dungeonPOS = [[0 for x in range(yvalues)] for x in range(xvalues)] 
@@ -267,6 +268,7 @@ while level < 6 or pLife <= 0:
 	roomy = random.randint(0,(yvalues/2))
 	currentDungeon = dungeonPOS
 	level += 1
+	sendZ(str(level))
 	sendW("l")
 	if level == 6:
 		print("Finally stumbling past the last door you make it to the exit. Finally you don't have to play this game again!")
@@ -281,6 +283,8 @@ print("Your score is " + str((pLife * level) + level))
 print("You got to level number " + str(level))
 print("with " + str(pLife) + "hp left")
 print("")
+serZ.close()
+serW.close()
 exit()
 
 
