@@ -1,0 +1,82 @@
+#include <LiquidCrystal.h>
+char inputchar =0;
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup() { 
+      lcd.begin(16, 2);
+      lcd.print("Game Start!");
+      Serial.begin(9600);
+}
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 1);
+  // print the number of seconds since reset:
+  lcd.print(millis() / 100);
+
+if (Serial.available()) {
+inputchar = Serial.read();
+Serial.println(inputchar);
+}
+
+if (inputchar == '1'){
+  lcd.clear();
+  lcd.print("Stage 1!");
+  
+  
+}
+    
+    if (inputchar == '2'){
+      lcd.clear();
+      lcd.print("Stage 1 Cleared");
+      delay(1000);
+        lcd.clear();
+          lcd.clear();
+        lcd.print("Stage 2!");
+    }
+  
+    
+    if (inputchar == '3') {
+        lcd.clear();
+      lcd.print("Stage 2 Cleared");
+      delay(1000);
+        lcd.clear();
+          lcd.clear();
+        lcd.print("Stage 3!");
+    }
+  
+    
+    if (inputchar == '4') {
+        lcd.clear();
+         lcd.print("Stage 3 Cleared");
+         delay(1000);
+           lcd.clear();
+             lcd.clear();
+        lcd.print("Stage 4!");
+    }
+  
+    
+    if (inputchar == '5') {
+        lcd.clear();
+       lcd.print("Stage 4 Cleared");
+       delay(1000);
+         lcd.clear();
+           lcd.clear();
+        lcd.print("Stage 5!");
+    }
+    if (inputchar == '7') {
+        lcd.clear();
+        lcd.print("Stage 5 Cleared");
+        delay(1000);
+          lcd.clear();
+        lcd.print("YOU WIN");
+
+        
+    }
+    if(inputchar == '6'){
+      lcd.clear();
+      lcd.print("You Lose");
+    }
+    inputchar = 'Q';
+    
+}
