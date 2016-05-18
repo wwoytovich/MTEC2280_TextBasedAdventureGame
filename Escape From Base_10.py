@@ -229,7 +229,7 @@ print("You begin to wonder if your whole home is gone, and, wait a second, how d
 print("")
 print("")
 sendW("p")
-sendZ("3")
+sendZ("1")
 
 
 while level < 6 or pLife <= 0:	
